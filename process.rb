@@ -9,8 +9,6 @@ class PROCESS
         "O" => ["A", "B", "C", "O"], # O+
         "W" => ["A", "Z", "B", "Y", "C", "X", "O", "W"]} # O-
   $last_patient = ""
-  $register = 0
-  $refactor
 
   def read
     $t1 = Time.now  # Init procedure timestamp
@@ -27,16 +25,15 @@ class PROCESS
       $blood_compatibility[patient1_blood].each do |blood|
         if blood == patient2_blood
             return true
-        else
-          return false
         end
       end
+      return false
   end
 
 # Gets the list of all compatible persons
   def get_compatibility(combination)
-      patient1 = combination[0]
-      patient2 = combination[1]
+      patient1 = combination.first
+      patient2 = combination.last
       p1_blood = patient1.last
       p2_blood = patient2.last
       if check_compatibility(p1_blood, p2_blood)
